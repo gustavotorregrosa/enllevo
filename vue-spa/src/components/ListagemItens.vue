@@ -20,9 +20,11 @@
           </tr>
         </tbody>
       </table>
-
+      <ValorTotal :valortotal="valortotal"/>
 
     </div>
+
+
 
     <FormSalvaEquipamento @recarregar="listaitens()" :apiurl="apiurl" ref="form"/>
     <ModalDeletar @recarregar="listaitens()" :apiurl="apiurl" ref="deletar"/>
@@ -33,12 +35,24 @@
 import { pJwtFetch } from "../suporte/helpers-jwt";
 import FormSalvaEquipamento from "./FormSalvaEquipamento.vue";
 import ModalDeletar from "./ModalDeletar.vue";
+import ValorTotal from "./ValorTotal.vue";
 export default {
   name: "ListagemItens",
   data() {
     return {
       equipamentos: []
     };
+  },
+
+  computed: {
+    valortotal: function(){
+      let valor = 0
+      this.equipamentos.forEach(element => {
+          valor += element.quantidade * parseFloat(element.valor)
+      });
+      return valor
+      
+    }
   },
 
   methods: {
@@ -85,7 +99,8 @@ export default {
   },
   components: {
     FormSalvaEquipamento,
-    ModalDeletar
+    ModalDeletar,
+    ValorTotal
   }
 };
 </script>
