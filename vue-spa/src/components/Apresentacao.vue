@@ -1,13 +1,14 @@
 <template>
-  <div>
     <div v-if="!estaLogado" class="espacado">
         <h4>Sistema de inventário</h4>
     </div>
-  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Apresentacao",
+  props: ["estaLogado"]
+};
 </script>
 
 <style scoped>
